@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Frontend Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2')format('woff2');font-weight:300;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2')format('woff2');font-weight:400;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2')format('woff2');font-weight:500;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2')format('woff2');font-weight:600;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2')format('woff2');font-weight:700;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2')format('woff2');font-weight:800;font-display:swap;}
+@font-face{font-family:'Pretendard';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2')format('woff2');font-weight:900;font-display:swap;}
+</style>
+<style>
+/* ══════════════════════════════════════
+   THEME VARIABLES
+══════════════════════════════════════ */
+
+/* ── DARK (default) ── */
+:root,[data-theme="dark"]{
+  --bg:#0a0a0f;
+  --bg2:#0f0f16;
+  --card:#16161f;
+  --card2:#1c1c28;
+  --border:rgba(255,255,255,0.07);
+  --accent:#00e5ff;
+  --accent2:#7c3aed;
+  --accent3:#f59e0b;
+  --text:#e8e8f0;
+  --muted:#6b6b80;
+  --heading:#ffffff;
+  --gradient:linear-gradient(135deg,#00e5ff 0%,#7c3aed 100%);
+  --shadow:none;
+  --shadow-lg:0 16px 48px rgba(0,0,0,.4);
+  --nav-bg:rgba(10,10,15,.78);
+  --hero-bg:transparent;
+  --skills-bg:transparent;
+  --projects-bg:linear-gradient(180deg,transparent 0%,rgba(124,58,237,.03) 50%,transparent 100%);
+  --outro-bg:transparent;
+  --footer-bg:transparent;
+  --modal-overlay:rgba(5,5,10,.88);
+  --modal-border:rgba(0,229,255,.15);
+  --img-overlay:linear-gradient(to bottom,transparent 50%,rgba(22,22,31,.95) 100%);
+  --card-tag-bg:rgba(255,255,255,.04);
+  --noise-opacity:.35;
+  --cursor-mix:screen;
+  --particle-a:#00e5ff;
+  --particle-b:#7c3aed;
+  --particle-c:#f59e0b;
+  --particle-d:#ffffff;
+}
+
+/* ── LIGHT ── */
+[data-theme="light"]{
+  --bg:#f4f4f8;
+  --bg2:#ecedf3;
+  --card:#ffffff;
+  --card2:#f9f9fc;
+  --border:rgba(0,0,0,0.08);
+  --accent:#0099bb;
+  --accent2:#6d28d9;
+  --accent3:#d97706;
+  --text:#1a1a2e;
+  --muted:#6b7280;
+  --heading:#1a1a2e;
+  --gradient:linear-gradient(135deg,#0099bb 0%,#6d28d9 100%);
+  --shadow:0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+  --nav-bg:rgba(244,244,248,.88);
+  --hero-bg:linear-gradient(160deg,#e8f4ff 0%,#f4f4f8 50%,#f0eaff 100%);
+  --skills-bg:#f9f9fc;
+  --projects-bg:#f4f4f8;
+  --outro-bg:#eef2ff;
+  --footer-bg:#f9f9fc;
+  --modal-overlay:rgba(26,26,46,.55);
+  --modal-border:rgba(0,153,187,.2);
+  --img-overlay:linear-gradient(to bottom,transparent 55%,rgba(255,255,255,.92) 100%);
+  --card-tag-bg:#ffffff;
+  --noise-opacity:.15;
+  --cursor-mix:normal;
+  --particle-a:#0099bb;
+  --particle-b:#6d28d9;
+  --particle-c:#d97706;
+  --particle-d:#94a3b8;
+}
+
+/* ── TRANSITION: smooth theme switch ── */
+*,*::before,*::after{
+  margin:0;padding:0;box-sizing:border-box;
+  transition:background-color .35s ease, border-color .35s ease, color .25s ease, box-shadow .35s ease;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Pretendard',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");opacity:var(--noise-opacity);}
+
+/* ══════════════════════════════════════
+   CURSOR
+══════════════════════════════════════ */
+.cursor{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:var(--cursor-mix);}
+.cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;opacity:.5;transition:width .2s,height .2s,border-color .2s,opacity .2s;}
+.cursor-ring.hovered{width:52px;height:52px;border-color:var(--accent3);opacity:.85;}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--gradient);z-index:200;transition:none;}
+
+/* ══════════════════════════════════════
+   THEME TOGGLE BUTTON
+══════════════════════════════════════ */
+.theme-toggle{
+  position:fixed;bottom:28px;right:28px;z-index:300;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--card);border:1.5px solid var(--border);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;
+  box-shadow:var(--shadow-lg);
+  transition:transform .25s,box-shadow .25s,background-color .35s,border-color .35s;
+}
+.theme-toggle:hover{transform:scale(1.12) rotate(20deg);box-shadow:0 8px 32px rgba(0,0,0,.25);}
+.theme-toggle .icon-dark{display:block;}
+.theme-toggle .icon-light{display:none;}
+[data-theme="light"] .theme-toggle .icon-dark{display:none;}
+[data-theme="light"] .theme-toggle .icon-light{display:block;}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:padding .3s,background-color .35s,border-color .35s;}
+nav.scrolled{padding:13px 48px;}
+.nav-logo{font-family:'Pretendard',sans-serif;font-weight:800;font-size:1.05rem;color:var(--heading);letter-spacing:.04em;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:var(--accent);}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:130px 48px 80px;position:relative;overflow:hidden;align-items:center;gap:40px;background:var(--hero-bg);}
+#particleCanvas{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.7;transition:none;}
+.glow{position:absolute;border-radius:50%;pointer-events:none;animation:glowPulse 7s ease-in-out infinite;}
+.glow-1{width:700px;height:700px;top:-150px;right:-150px;}
+.glow-2{width:500px;height:500px;bottom:-80px;left:100px;animation-delay:-3.5s;animation-direction:reverse;}
+[data-theme="dark"] .glow-1{background:radial-gradient(circle,rgba(0,229,255,.07) 0%,transparent 68%);}
+[data-theme="dark"] .glow-2{background:radial-gradient(circle,rgba(124,58,237,.09) 0%,transparent 68%);}
+[data-theme="light"] .glow-1{background:radial-gradient(circle,rgba(0,153,187,.1) 0%,transparent 68%);}
+[data-theme="light"] .glow-2{background:radial-gradient(circle,rgba(109,40,217,.08) 0%,transparent 68%);}
+@keyframes glowPulse{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.18);opacity:1;}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.15;}}
+
+.hero-left{position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.22);border-radius:100px;padding:6px 18px;font-size:.72rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px;}
+[data-theme="light"] .hero-badge{background:rgba(0,153,187,.08);border-color:rgba(0,153,187,.28);}
+.pulse-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 1.6s infinite;flex-shrink:0;}
+.hero-name{font-family:'Pretendard',sans-serif;font-weight:800;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1.05;color:var(--heading);margin-bottom:20px;}
+.hero-name .accent-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-tagline{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--accent3);margin-bottom:20px;min-height:1.4em;}
+.hero-tagline .prefix{color:var(--muted);margin-right:4px;}
+.typewriter-text::after{content:'|';animation:blink .8s infinite;color:var(--accent);}
+.hero-desc{font-size:.95rem;color:var(--muted);max-width:480px;line-height:1.95;margin-bottom:28px;}
+.hero-desc em{color:var(--accent);font-style:normal;font-weight:600;}
+.hero-info-row{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:28px;}
+.hero-info-item{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);}
+.hero-info-item .dot{width:5px;height:5px;background:var(--accent2);border-radius:50%;flex-shrink:0;}
+.hero-core-skills{display:flex;flex-wrap:wrap;gap:8px;}
+.core-skill-tag{background:var(--card-tag-bg);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text);cursor:default;}
+.core-skill-tag:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.core-skill-tag.primary{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent);}
+[data-theme="light"] .core-skill-tag{box-shadow:var(--shadow);}
+
+/* Hero Right */
+.hero-right{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:24px;}
+.photo-frame{position:relative;width:210px;height:210px;border-radius:22px;background:var(--card);border:1px solid var(--border);overflow:hidden;flex-shrink:0;transition:transform .4s ease,box-shadow .4s ease;}
+.photo-frame:hover{box-shadow:0 0 48px color-mix(in srgb,var(--accent) 30%,transparent);}
+.photo-frame::after{content:'';position:absolute;inset:0;background:var(--gradient);opacity:.08;}
+.photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.photo-icon{font-size:3.2rem;}
+.photo-label{font-size:.67rem;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.photo-corner{position:absolute;width:20px;height:20px;border-color:var(--accent);border-style:solid;opacity:.6;}
+.photo-corner.tl{top:8px;left:8px;border-width:2px 0 0 2px;}
+.photo-corner.tr{top:8px;right:8px;border-width:2px 2px 0 0;}
+.photo-corner.bl{bottom:8px;left:8px;border-width:0 0 2px 2px;}
+.photo-corner.br{bottom:8px;right:8px;border-width:0 2px 2px 0;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:310px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 15px;box-shadow:var(--shadow);}
+.stat-card:hover{border-color:color-mix(in srgb,var(--accent) 40%,transparent);transform:translateY(-3px);}
+.stat-value{font-family:'Pretendard',sans-serif;font-weight:800;font-size:1.45rem;color:var(--heading);line-height:1;}
+.stat-value span{color:var(--accent);font-size:.9rem;}
+.stat-label{font-size:.68rem;color:var(--muted);margin-top:4px;}
+
+/* ══════════════════════════════════════
+   SECTION COMMON
+══════════════════════════════════════ */
+.section-header{margin-bottom:52px;}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px;}
+.section-title{font-family:'Pretendard',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.9rem);color:var(--heading);line-height:1.1;}
+.section-title .dim{color:var(--muted);font-weight:400;}
+.divider{height:1px;background:var(--border);margin:52px 0;}
+
+/* ══════════════════════════════════════
+   SKILLS
+══════════════════════════════════════ */
+#skills{padding:100px 48px;background:var(--skills-bg);}
+.strengths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:64px;}
+.strength-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;will-change:transform;box-shadow:var(--shadow);}
+.strength-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient);transform:scaleX(0);transform-origin:left;transition:transform .45s ease;}
+.strength-card:hover{border-color:color-mix(in srgb,var(--accent) 30%,transparent);box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+.strength-card:hover::before{transform:scaleX(1);}
+.strength-card .shine{position:absolute;inset:0;border-radius:16px;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.06) 0%,transparent 60%);pointer-events:none;opacity:0;transition:opacity .3s;}
+[data-theme="dark"] .strength-card:hover .shine{opacity:1;}
+.strength-icon{font-size:1.65rem;margin-bottom:12px;}
+.strength-title{font-family:'Pretendard',sans-serif;font-weight:700;font-size:.95rem;color:var(--heading);margin-bottom:8px;}
+.strength-desc{font-size:.78rem;color:var(--muted);line-height:1.85;}
+
+.skills-section-title{font-family:'Pretendard',sans-serif;font-weight:700;font-size:1rem;color:var(--heading);margin-bottom:22px;display:flex;align-items:center;gap:12px;}
+.skills-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;margin-bottom:44px;}
+.skill-category h4{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.skill-tag-list{display:flex;flex-wrap:wrap;gap:8px;}
+.skill-tag{display:inline-flex;align-items:center;gap:6px;background:var(--card-tag-bg);border:1px solid var(--border);border-radius:8px;padding:7px 13px;font-size:.78rem;color:var(--text);cursor:default;box-shadow:var(--shadow);}
+.skill-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.5;}
+.skill-tag:hover{border-color:color-mix(in srgb,var(--accent) 40%,transparent);color:var(--accent);transform:translateY(-2px);}
+.skill-tag:hover::before{opacity:1;}
+.skill-tag.primary{border-color:color-mix(in srgb,var(--accent) 35%,transparent);color:var(--accent);}
+.skill-tag.primary::before{opacity:1;}
+.tech-tags-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px;}
+.tech-tag{background:var(--card-tag-bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);box-shadow:var(--shadow);}
+.tech-tag:hover{border-color:var(--accent2);color:var(--text);transform:translateY(-3px);}
+[data-theme="dark"] .tech-tag:hover{background:rgba(124,58,237,.08);}
+[data-theme="light"] .tech-tag:hover{background:rgba(109,40,217,.06);}
+
+/* ══════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════ */
+#projects{padding:100px 48px;background:var(--projects-bg);}
+.proj-group-label{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+.proj-group-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;font-weight:700;}
+.proj-group-badge.fullstack{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);}
+.proj-group-badge.pub{background:color-mix(in srgb,var(--accent3) 12%,transparent);color:var(--accent3);border:1px solid color-mix(in srgb,var(--accent3) 28%,transparent);}
+.proj-group-company{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);}
+.projects-list{display:flex;flex-direction:column;gap:24px;}
+
+/* fullstack card */
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;position:relative;box-shadow:var(--shadow);}
+.project-card:hover{border-color:color-mix(in srgb,var(--accent) 32%,transparent);box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.project-img-wrap{width:100%;height:220px;background:var(--bg2);border-bottom:1px solid var(--border);position:relative;overflow:hidden;flex-shrink:0;}
+.project-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.project-card:hover .project-img-wrap img{transform:scale(1.04);}
+.project-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.project-img-placeholder .img-icon{font-size:2rem;opacity:.3;}
+.project-img-placeholder .img-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);opacity:.4;letter-spacing:.08em;}
+.project-img-wrap::after{content:'';position:absolute;inset:0;background:var(--img-overlay);pointer-events:none;}
+.project-body{padding:28px 32px 32px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;}
+.project-card .expand-hint{position:absolute;bottom:14px;right:18px;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);display:flex;align-items:center;gap:5px;opacity:0;}
+.project-card:hover .expand-hint{opacity:1;}
+.expand-hint .arrow{color:var(--accent);}
+.project-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.project-company{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;}
+.project-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
+.project-type-badge{font-size:.63rem;padding:3px 10px;border-radius:100px;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+.badge-fullstack{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);}
+.badge-pub{background:color-mix(in srgb,var(--accent3) 12%,transparent);color:var(--accent3);border:1px solid color-mix(in srgb,var(--accent3) 22%,transparent);}
+.project-title{font-family:'Pretendard',sans-serif;font-weight:700;font-size:1.15rem;color:var(--heading);margin-bottom:8px;line-height:1.3;}
+.project-desc{font-size:.82rem;color:var(--muted);line-height:1.85;margin-bottom:16px;max-width:600px;}
+.project-tasks{list-style:none;margin-bottom:16px;}
+.project-tasks li{font-size:.77rem;color:var(--muted);padding:3px 0;display:flex;align-items:flex-start;gap:8px;}
+.project-tasks li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:1px;}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px;}
+.stack-chip{background:var(--card-tag-bg);border:1px solid var(--border);border-radius:4px;padding:3px 9px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);}
+.project-number{font-family:'Pretendard',sans-serif;font-weight:900;font-size:3.5rem;color:var(--border);line-height:1;white-space:nowrap;user-select:none;}
+.project-card:hover .project-number{color:color-mix(in srgb,var(--accent) 10%,transparent);}
+
+/* pub grid */
+.pub-intro{font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:28px;padding:16px 20px;background:color-mix(in srgb,var(--accent3) 7%,transparent);border:1px solid color-mix(in srgb,var(--accent3) 18%,transparent);border-radius:12px;display:flex;align-items:flex-start;gap:10px;}
+.pub-intro::before{content:'📌';flex-shrink:0;margin-top:1px;}
+.pub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.pub-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0 0 18px;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.pub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:1;}
+.pub-card:hover{border-color:color-mix(in srgb,var(--accent3) 35%,transparent);transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.pub-card:hover::before{transform:scaleX(1);}
+.pub-card-img{width:100%;height:140px;background:var(--bg2);border-bottom:1px solid var(--border);overflow:hidden;position:relative;margin-bottom:14px;}
+.pub-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.pub-card:hover .pub-card-img img{transform:scale(1.05);}
+.pub-card-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;}
+.pub-card-img-placeholder .pi-icon{font-size:1.6rem;opacity:.25;}
+.pub-card-img-placeholder .pi-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);opacity:.4;letter-spacing:.06em;}
+.pub-card-icon{font-size:1.3rem;margin-bottom:7px;padding:0 18px;}
+.pub-card-name{font-family:'Pretendard',sans-serif;font-weight:700;font-size:.86rem;color:var(--heading);margin-bottom:6px;line-height:1.4;padding:0 18px;}
+.pub-card-desc{font-size:.74rem;color:var(--muted);line-height:1.75;margin-bottom:11px;padding:0 18px;}
+.pub-card-tags{display:flex;flex-wrap:wrap;gap:5px;padding:0 18px;}
+.pub-tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);background:var(--card-tag-bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;}
+
+/* ══════════════════════════════════════
+   OUTRO
+══════════════════════════════════════ */
+#outro{padding:100px 48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;border-top:1px solid var(--border);position:relative;overflow:hidden;background:var(--outro-bg);}
+#outro::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center bottom,color-mix(in srgb,var(--accent) 7%,transparent) 0%,transparent 60%);pointer-events:none;}
+.outro-title{font-family:'Pretendard',sans-serif;font-weight:800;font-size:clamp(1.9rem,3.5vw,2.8rem);color:var(--heading);line-height:1.15;margin-bottom:16px;}
+.outro-title span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.outro-desc{font-size:.87rem;color:var(--muted);line-height:1.95;margin-bottom:32px;}
+.outro-desc strong{color:var(--text);font-weight:600;}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gradient);color:#fff;font-family:'Pretendard',sans-serif;font-weight:700;font-size:.84rem;padding:13px 26px;border-radius:10px;text-decoration:none;}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 36px color-mix(in srgb,var(--accent) 35%,transparent);}
+.cta-btn::after{content:'→';}
+.contact-cards{display:flex;flex-direction:column;gap:10px;}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px 18px;display:flex;align-items:center;gap:13px;box-shadow:var(--shadow);}
+.contact-card:hover{border-color:color-mix(in srgb,var(--accent) 28%,transparent);transform:translateX(5px);}
+.contact-icon{font-size:1.2rem;}
+.contact-label{font-size:.66rem;color:var(--muted);margin-bottom:2px;letter-spacing:.05em;}
+.contact-value{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);}
+footer{padding:26px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--footer-bg);}
+.footer-txt{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
+.footer-txt span{color:var(--accent);}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+.modal-backdrop{position:fixed;inset:0;z-index:500;background:var(--modal-overlay);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s;}
+.modal-backdrop.open{opacity:1;pointer-events:all;}
+.modal{background:var(--card);border:1px solid var(--modal-border);border-radius:24px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(40px) scale(.97);transition:transform .38s cubic-bezier(.16,1,.3,1),opacity .38s,background-color .35s,border-color .35s;opacity:0;box-shadow:var(--shadow-lg);scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--accent) 25%,transparent) transparent;}
+.modal-backdrop.open .modal{transform:translateY(0) scale(1);opacity:1;}
+.modal-header{padding:30px 34px 22px;border-bottom:1px solid var(--border);position:relative;background:var(--card2);}
+.modal-close{position:absolute;top:22px;right:22px;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--muted);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--border);color:var(--heading);transform:rotate(90deg);}
+.modal-company-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.modal-title{font-family:'Pretendard',sans-serif;font-weight:800;font-size:1.4rem;color:var(--heading);line-height:1.25;margin-bottom:8px;}
+.modal-period{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);}
+.modal-body{padding:26px 34px 34px;}
+.modal-section{margin-bottom:26px;}
+.modal-section-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.modal-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.modal-desc{font-size:.86rem;color:var(--muted);line-height:1.9;}
+.modal-tasks{list-style:none;}
+.modal-tasks li{font-size:.83rem;color:var(--text);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;line-height:1.65;}
+.modal-tasks li:last-child{border-bottom:none;}
+.modal-tasks li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:3px;font-size:.73rem;}
+.modal-stack{display:flex;flex-wrap:wrap;gap:8px;}
+.modal-chip{background:color-mix(in srgb,var(--accent) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);border-radius:6px;padding:5px 13px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);}
+.modal-highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
+.modal-highlight{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:13px 15px;text-align:center;}
+.mh-val{font-family:'Pretendard',sans-serif;font-weight:800;font-size:1.25rem;color:var(--heading);}
+.mh-val span{color:var(--accent);font-size:.88rem;}
+.mh-label{font-size:.66rem;color:var(--muted);margin-top:4px;}
+
+/* ══════════════════════════════════════
+   REVEAL
+══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:960px){
+  nav{padding:14px 20px;}.nav-links{display:none;}
+  #hero{grid-template-columns:1fr;padding:100px 20px 60px;}
+  .hero-right{flex-direction:row;justify-content:flex-start;}
+  #skills,#projects,#outro{padding:68px 20px;}
+  .strengths-grid{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  #outro{grid-template-columns:1fr;}
+  .project-body{grid-template-columns:1fr;padding:20px 22px 24px;}
+  .project-number{display:none;}
+  .project-img-wrap{height:160px;}
+  .pub-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;gap:8px;text-align:center;}
+  .modal-body{padding:18px 20px 26px;}.modal-header{padding:22px 20px 18px;}
+  .theme-toggle{bottom:20px;right:20px;width:46px;height:46px;}
+}
+@media(max-width:560px){
+  .strengths-grid{grid-template-columns:1fr;}
+  .pub-grid{grid-template-columns:1fr;}
+  .modal-highlight-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" title="테마 전환">
+  <span class="icon-dark">🌙</span>
+  <span class="icon-light">☀️</span>
+</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">DEV<span>.</span>PORTFOLIO</div>
+  <ul class="nav-links">
+    <li><a href="#hero">소개</a></li>
+    <li><a href="#skills">스킬</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#outro">연락처</a></li>
+  </ul>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <canvas id="particleCanvas"></canvas>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-badge"><span class="pulse-dot"></span>Available for new opportunities</div>
+    <h1 class="hero-name">홍길동<br><span class="accent-text">Frontend Developer</span></h1>
+    <p class="hero-tagline"><span class="prefix">&gt;</span><span id="typewriterEl" class="typewriter-text"></span></p>
+    <p class="hero-desc">
+      단순히 화면을 만드는 게 아니라, <em>사용자가 느끼는 경험</em>을 설계합니다.<br>
+      퍼블리싱 감각 위에 프론트엔드 개발 역량을 쌓아 —<br>
+      디자인 의도를 코드로 정확히 구현하는 개발자입니다.<br>
+      백엔드 경험은 협업과 구조 이해의 무기로 활용합니다.
+    </p>
+    <div class="hero-info-row">
+      <div class="hero-info-item"><span class="dot"></span>대전 거주</div>
+      <div class="hero-info-item"><span class="dot"></span>만 ○○세</div>
+      <div class="hero-info-item"><span class="dot"></span>개발 경력 약 5년</div>
+      <div class="hero-info-item"><span class="dot"></span>현재 재직 중</div>
+    </div>
+    <div class="hero-core-skills">
+      <span class="core-skill-tag primary">HTML / CSS / JS</span>
+      <span class="core-skill-tag primary">Angular 18</span>
+      <span class="core-skill-tag primary">TypeScript</span>
+      <span class="core-skill-tag primary">반응형 퍼블리싱</span>
+      <span class="core-skill-tag primary">UI 컴포넌트</span>
+      <span class="core-skill-tag">Spring Boot</span>
+      <span class="core-skill-tag">MongoDB</span>
+      <span class="core-skill-tag">REST API</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-frame" id="photoFrame">
+      <div class="photo-placeholder">
+        <div class="photo-icon">👤</div>
+        <div class="photo-label">// 사진 교체 예정</div>
+      </div>
+      <div class="photo-corner tl"></div><div class="photo-corner tr"></div>
+      <div class="photo-corner bl"></div><div class="photo-corner br"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-value">5<span>+</span></div><div class="stat-label">총 경력 연수</div></div>
+      <div class="stat-card"><div class="stat-value">10<span>+</span></div><div class="stat-label">완료 프로젝트</div></div>
+      <div class="stat-card"><div class="stat-value">UI<span>/UX</span></div><div class="stat-label">디자인 감각</div></div>
+      <div class="stat-card"><div class="stat-value">F<span>+α</span></div><div class="stat-label">프론트 중심</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SKILLS ════ -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-num">// 02 — STRENGTHS &amp; SKILLS</div>
+    <h2 class="section-title">내 강점 <span class="dim">&amp;</span> 기술 스택</h2>
+  </div>
+  <div class="strengths-grid">
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">🎨</div><div class="strength-title">디자인 감각 × 코드 정확도</div><div class="strength-desc">디자인 의도를 픽셀 수준까지 코드로 구현합니다. 퍼블리셔 출신으로 여백·타이포·컬러 감각이 남다르며, 기획·디자인과 개발 사이 간극을 좁힙니다.</div></div>
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">🖥️</div><div class="strength-title">퍼블리싱 전문성 · 3년+</div><div class="strength-desc">2년 8개월의 전문 퍼블리셔 경력. 에너지·IoT·그룹웨어·홍보사이트까지 다양한 도메인의 HTML/CSS 마크업 담당. 반응형·크로스브라우징 능숙.</div></div>
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">⚡</div><div class="strength-title">Angular 컴포넌트 개발</div><div class="strength-desc">Angular 18 기반 UI 컴포넌트 설계·구현. 복잡한 AG Grid 데이터 테이블, 검색 필터, 다국어 처리 등 실서비스 기능들을 직접 구축했습니다.</div></div>
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">🌍</div><div class="strength-title">다국어(i18n) · 글로벌 UI</div><div class="strength-desc">베트남어 포함 3개국어 IoT 플랫폼, 해양생물 정보 서비스 등 실서비스 다국어 UI를 직접 설계하고 구현한 경험이 있습니다.</div></div>
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">🔗</div><div class="strength-title">백엔드 이해 → 협업의 무기</div><div class="strength-desc">Spring Boot·MongoDB·REST API 실무 경험으로 백엔드 개발자와 정확하게 소통합니다. API 스펙 이해, 연동 이슈 직접 디버깅이 가능합니다.</div></div>
+    <div class="strength-card reveal"><div class="shine"></div><div class="strength-icon">🤖</div><div class="strength-title">AI · 신기술 접목 경험</div><div class="strength-desc">FAISS 벡터 유사도 검색, ETL 파이프라인 등 최신 기술을 실서비스 UI와 연결한 경험. 새로운 기술을 빠르게 흡수하고 화면에 녹여냅니다.</div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="skills-section-title reveal">기술 스택</div>
+  <div class="skills-grid reveal">
+    <div class="skill-category">
+      <h4>🎯 Core — Frontend &amp; Publishing</h4>
+      <div class="skill-tag-list">
+        <span class="skill-tag primary">HTML5 / CSS3</span><span class="skill-tag primary">JavaScript (ES6+)</span>
+        <span class="skill-tag primary">Angular 18</span><span class="skill-tag primary">TypeScript 5.4</span>
+        <span class="skill-tag primary">AG Grid 34</span><span class="skill-tag primary">반응형 웹</span>
+        <span class="skill-tag primary">크로스브라우징</span><span class="skill-tag primary">시맨틱 마크업</span>
+        <span class="skill-tag primary">i18n 다국어</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h4>➕ Plus — Backend &amp; 협업 역량</h4>
+      <div class="skill-tag-list">
+        <span class="skill-tag">Spring Boot 2.7</span><span class="skill-tag">Java 8</span>
+        <span class="skill-tag">MongoDB</span><span class="skill-tag">MongoRepository</span>
+        <span class="skill-tag">REST API 설계</span><span class="skill-tag">ETL Pipeline</span>
+        <span class="skill-tag">FAISS (AI 검색)</span><span class="skill-tag">Node.js 18</span>
+      </div>
+    </div>
+  </div>
+  <div class="skills-section-title reveal">툴 &amp; 환경</div>
+  <div class="tech-tags-grid reveal">
+    <div class="tech-tag">VSCode</div><div class="tech-tag">IntelliJ</div>
+    <div class="tech-tag">Postman</div><div class="tech-tag">MongoDB Compass</div>
+    <div class="tech-tag">mongosh</div><div class="tech-tag">Git</div>
+    <div class="tech-tag">Notion</div><div class="tech-tag">Node.js 18</div>
+    <div class="tech-tag">CLI Tool</div><div class="tech-tag">FAISS</div>
+    <div class="tech-tag">i18n</div><div class="tech-tag">Vector DB</div>
+  </div>
+</section>
+
+<!-- ════ PROJECTS ════ -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-num">// 03 — PROJECTS</div>
+    <h2 class="section-title">진행 프로젝트</h2>
+  </div>
+
+  <div class="proj-group-label reveal">
+    <span class="proj-group-badge fullstack">⚡ Full-Stack 개발</span>
+    <span class="proj-group-company">(주)인실리코젠 · 2024.10 — 현재</span>
+  </div>
+  <div class="projects-list">
+    <div class="project-card reveal" data-modal="modal-1">
+      <div class="project-img-wrap">
+        <!-- <img src="이미지경로.png" alt="해양 펩타이드 플랫폼"> -->
+        <div class="project-img-placeholder"><div class="img-icon">🖼️</div><div class="img-label">// 스크린샷 또는 썸네일 교체</div></div>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-meta">
+            <span class="project-company">(주)인실리코젠</span>
+            <span class="project-date">2024.10 — 현재</span>
+            <span class="project-type-badge badge-fullstack">Full-Stack</span>
+          </div>
+          <h3 class="project-title">해양 펩타이드 &amp; 독성유전자 통합정보 플랫폼</h3>
+          <p class="project-desc">해양수산부 – 국립해양자원관 연구과제. 해양 생명정보 데이터를 통합 구축·시각화하고 AI 기반 유사도 검색을 제공하는 풀스택 바이오인포매틱스 플랫폼.</p>
+          <ul class="project-tasks">
+            <li>해양 펩타이드 / 독성유전자 통합정보 구축 및 시각화 기능 개발 (Angular + Spring Boot)</li>
+            <li>데이터 ETL 파이프라인 설계 및 구축 (원천 데이터 정제 → MongoDB 적재)</li>
+            <li>MongoDB 기반 DB 스키마 설계 · 구축 및 데이터 정제</li>
+            <li>CLI 기반 대량 데이터 등록 기능 구현 (배치 처리)</li>
+            <li>AI 기반 유사도 검색 기능 구현 — 벡터화 + FAISS 인덱스 활용</li>
+            <li>다국어(i18n) 서비스 개발 (한국어 / 영어)</li>
+            <li>대량 데이터 처리를 위한 일괄 등록 서브 기능 개발</li>
+          </ul>
+          <div class="project-stack">
+            <span class="stack-chip">Angular 18</span><span class="stack-chip">TypeScript 5.4</span>
+            <span class="stack-chip">AG Grid 34</span><span class="stack-chip">Spring Boot 2.7</span>
+            <span class="stack-chip">MongoDB</span><span class="stack-chip">FAISS</span>
+            <span class="stack-chip">ETL Pipeline</span><span class="stack-chip">i18n</span>
+          </div>
+        </div>
+        <div class="project-number">01</div>
+      </div>
+      <div class="expand-hint"><span class="arrow">⊕</span> 자세히 보기</div>
+    </div>
+
+    <div class="project-card reveal" data-modal="modal-2">
+      <div class="project-img-wrap">
+        <!-- <img src="이미지경로.png" alt="Mobidic 플랫폼"> -->
+        <div class="project-img-placeholder"><div class="img-icon">🖼️</div><div class="img-label">// 스크린샷 또는 썸네일 교체</div></div>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-meta">
+            <span class="project-company">(주)인실리코젠</span>
+            <span class="project-date">2024.10 — 현재</span>
+            <span class="project-type-badge badge-fullstack">Full-Stack</span>
+          </div>
+          <h3 class="project-title">Mobidic — 해양 생물다양성 통합정보 플랫폼</h3>
+          <p class="project-desc">해양수산부 국립해양자원관 연구과제. 해양생물 분류·분포 정보를 통합 제공하는 국책 과제 기반 바이오다이버시티 플랫폼. 지도 기반 시각화·고급 검색·다국어 서비스.</p>
+          <ul class="project-tasks">
+            <li>해양생물 분류 / 분포 정보 통합 DB 구축 및 시각화 기능 개발</li>
+            <li>대용량 생물다양성 데이터 ETL 파이프라인 설계 및 구축</li>
+            <li>지도 기반 분포 시각화 컴포넌트 개발 (Geo 데이터 처리)</li>
+            <li>다중 조건 복합 검색 기능 구현 (필터 UI + 백엔드 쿼리 최적화)</li>
+            <li>CLI 기반 일괄 데이터 등록 및 갱신 기능 구현</li>
+            <li>다국어(한국어 / 영어) 서비스 개발</li>
+          </ul>
+          <div class="project-stack">
+            <span class="stack-chip">Angular 18</span><span class="stack-chip">TypeScript 5.4</span>
+            <span class="stack-chip">AG Grid 34</span><span class="stack-chip">Spring Boot 2.7</span>
+            <span class="stack-chip">MongoDB</span><span class="stack-chip">Geo Data</span>
+            <span class="stack-chip">ETL Pipeline</span><span class="stack-chip">i18n</span>
+          </div>
+        </div>
+        <div class="project-number">02</div>
+      </div>
+      <div class="expand-hint"><span class="arrow">⊕</span> 자세히 보기</div>
+    </div>
+  </div>
+
+  <div class="proj-group-label reveal" style="margin-top:56px;">
+    <span class="proj-group-badge pub">🖌 퍼블리싱</span>
+    <span class="proj-group-company">(주)에이투엠 · 2020.11 — 2023.06</span>
+  </div>
+  <div class="pub-grid">
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🌊</div><div class="pub-card-name">해상풍력단지 통합 O&amp;M 서비스 솔루션</div><div class="pub-card-desc">해상풍력 운영·유지보수 통합 플랫폼 전체 퍼블리싱. 실시간 터빈 모니터링 대시보드 UI 구현.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">대시보드 UI</span><span class="pub-tag">반응형</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">⚡</div><div class="pub-card-name">제주에너지공사 해상풍력 서비스</div><div class="pub-card-desc">제주에너지공사 납품용 해상풍력 운영 서비스 화면 구현. 공공기관 수준의 완성도·접근성 대응.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">공공 UI</span><span class="pub-tag">크로스브라우징</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🔧</div><div class="pub-card-name">WT 전용 스마트 O&amp;M 플랫폼</div><div class="pub-card-desc">풍력터빈 전용 스마트 운영·유지보수 플랫폼 퍼블리싱. 장비 상태 인디케이터·알람 UI 구성.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">IoT UI</span><span class="pub-tag">상태 모니터링</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🛡️</div><div class="pub-card-name">HSE 운영지원시스템</div><div class="pub-card-desc">안전·보건·환경 운영 지원 시스템 퍼블리싱. 복잡한 폼·리스트·보고서 레이아웃 마크업.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">폼 UI</span><span class="pub-tag">반응형</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🌿</div><div class="pub-card-name">바이윈드 홍보사이트</div><div class="pub-card-desc">풍력 솔루션 기업 바이윈드(Bywind) 기업 홍보용 반응형 웹사이트 퍼블리싱.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">브랜드 사이트</span><span class="pub-tag">반응형</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🌏</div><div class="pub-card-name">베트남 에너지 IoT 플랫폼</div><div class="pub-card-desc">베트남 다수용가 원격 검침 에너지 IoT 플랫폼 퍼블리싱. 베트남어 포함 3개 국어 UI 대응.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">다국어(i18n)</span><span class="pub-tag">IoT 대시보드</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🏭</div><div class="pub-card-name">산업단지 EMS &amp; 전력시장 운영서비스</div><div class="pub-card-desc">산업단지 마이크로그리드 EMS 및 실시간 전력시장 운영 데이터 시각화 서비스 퍼블리싱.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">실시간 차트</span><span class="pub-tag">그리드 레이아웃</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">💬</div><div class="pub-card-name">그룹웨어 [아임웨어]</div><div class="pub-card-desc">사내 그룹웨어 솔루션 전체 UI 퍼블리싱. 결재·메일·게시판·일정 등 엔터프라이즈 컴포넌트 구현.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">그룹웨어 UI</span><span class="pub-tag">엔터프라이즈</span></div></div>
+    <div class="pub-card reveal"><div class="pub-card-img"><div class="pub-card-img-placeholder"><div class="pi-icon">🖼️</div><div class="pi-label">// 이미지 교체</div></div></div><div class="pub-card-icon">🧩</div><div class="pub-card-name">에이투엠 프레임워크 플랫폼 &amp; API TEST TOOL</div><div class="pub-card-desc">사내 공통 프레임워크 플랫폼 전체 UI 퍼블리싱 및 API 테스트 도구 화면 구성.</div><div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">플랫폼 UI</span><span class="pub-tag">개발 도구</span></div></div>
+  </div>
+</section>
+
+<!-- ════ OUTRO ════ -->
+<section id="outro">
+  <div class="outro-left reveal">
+    <h2 class="outro-title">함께 만들고 싶은<br><span>프로젝트가 있으신가요?</span></h2>
+    <p class="outro-desc">화면을 만드는 것보다 <strong>경험을 설계</strong>하는 걸 좋아합니다.<br>퍼블리싱 감각과 프론트 개발 역량을 함께 갖추고 있으며,<br>백엔드 경험으로 팀 전체의 흐름을 이해하며 개발합니다.<br>디자인과 개발 사이의 간극을 메우는 개발자로 함께하고 싶습니다.</p>
+    <a href="mailto:your@email.com" class="cta-btn">연락하기</a>
+  </div>
+  <div class="outro-right reveal">
+    <div class="contact-cards">
+      <div class="contact-card"><div class="contact-icon">📧</div><div><div class="contact-label">EMAIL</div><div class="contact-value">your@email.com</div></div></div>
+      <div class="contact-card"><div class="contact-icon">📍</div><div><div class="contact-label">LOCATION</div><div class="contact-value">대전광역시</div></div></div>
+      <div class="contact-card"><div class="contact-icon">💼</div><div><div class="contact-label">STATUS</div><div class="contact-value">재직 중 · 기회 검토 가능</div></div></div>
+      <div class="contact-card"><div class="contact-icon">🐙</div><div><div class="contact-label">GITHUB</div><div class="contact-value">github.com/yourid</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-txt">© 2025 — Frontend Developer Portfolio. All rights reserved.</div>
+  <div class="footer-txt">Built with <span>HTML · CSS · JS</span></div>
+</footer>
+
+<!-- ════ MODALS ════ -->
+<div class="modal-backdrop" id="modal-1">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('modal-1')">✕</button>
+      <div class="modal-company-row"><span class="project-company">(주)인실리코젠</span><span class="project-type-badge badge-fullstack">Full-Stack</span></div>
+      <h2 class="modal-title">해양 펩타이드 &amp; 독성유전자 통합정보 플랫폼</h2>
+      <div class="modal-period">2024.10 — 현재 · 대전지사 · 사원 · 해양수산부 국립해양자원관 연구과제</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-highlight-grid" style="margin-bottom:24px;">
+        <div class="modal-highlight"><div class="mh-val">2<span>종</span></div><div class="mh-label">통합 데이터셋</div></div>
+        <div class="modal-highlight"><div class="mh-val">AI<span>+</span></div><div class="mh-label">유사도 검색</div></div>
+        <div class="modal-highlight"><div class="mh-val">i<span>18n</span></div><div class="mh-label">다국어 지원</div></div>
+      </div>
+      <div class="modal-section"><div class="modal-section-title">프로젝트 개요</div><p class="modal-desc">해양 펩타이드 및 독성유전자 데이터를 통합 구축하고 시각화·고급 검색 기능을 제공하는 생명정보 플랫폼. AI 기반 벡터 유사도 검색(FAISS)을 도입하여 기존 키워드 검색의 한계를 넘어서고, MongoDB로 비정형 생명정보 데이터를 효과적으로 관리합니다.</p></div>
+      <div class="modal-section"><div class="modal-section-title">담당 업무</div><ul class="modal-tasks"><li>해양 펩타이드 통합정보 구축 및 시각화 기능 개발 (Angular + Spring Boot)</li><li>독성유전자 통합정보 구축 및 시각화 기능 개발</li><li>ETL 파이프라인 설계 및 구축 (정제 → MongoDB 저장)</li><li>CLI 기반 대량 데이터 등록 기능 구현 (배치 처리)</li><li>MongoDB 기반 DB 구축 (스키마 설계 포함)</li><li>AI 기반 유사도 검색 구현 — 벡터화 + FAISS 인덱스</li><li>다국어(i18n) 서비스 개발 (한국어 / 영어)</li><li>일괄 등록 서브 기능 개발</li></ul></div>
+      <div class="modal-section"><div class="modal-section-title">사용 기술</div><div class="modal-stack"><span class="modal-chip">Angular 18</span><span class="modal-chip">TypeScript 5.4</span><span class="modal-chip">AG Grid 34</span><span class="modal-chip">Spring Boot 2.7</span><span class="modal-chip">Java 8</span><span class="modal-chip">MongoDB</span><span class="modal-chip">FAISS</span><span class="modal-chip">ETL Pipeline</span><span class="modal-chip">i18n</span><span class="modal-chip">Node.js 18</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modal-2">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('modal-2')">✕</button>
+      <div class="modal-company-row"><span class="project-company">(주)인실리코젠</span><span class="project-type-badge badge-fullstack">Full-Stack</span></div>
+      <h2 class="modal-title">Mobidic — 해양 생물다양성 통합정보 플랫폼</h2>
+      <div class="modal-period">2024.10 — 현재 · 대전지사 · 사원 · 해양수산부 국립해양자원관 연구과제</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-highlight-grid" style="margin-bottom:24px;">
+        <div class="modal-highlight"><div class="mh-val">국<span>책</span></div><div class="mh-label">해양수산부 과제</div></div>
+        <div class="modal-highlight"><div class="mh-val">Geo<span>+</span></div><div class="mh-label">지도 시각화</div></div>
+        <div class="modal-highlight"><div class="mh-val">i<span>18n</span></div><div class="mh-label">다국어 서비스</div></div>
+      </div>
+      <div class="modal-section"><div class="modal-section-title">프로젝트 개요</div><p class="modal-desc">해양생물 분류·분포 정보를 통합 제공하는 국책 연구과제 기반 바이오다이버시티 플랫폼(Mobidic). 대용량 해양생물 데이터를 ETL로 처리하여 MongoDB에 구축하고, 지도 기반 시각화·고급 검색·다국어 서비스를 제공합니다.</p></div>
+      <div class="modal-section"><div class="modal-section-title">담당 업무</div><ul class="modal-tasks"><li>해양생물 분류 / 분포 정보 통합 DB 구축 및 시각화 기능 개발</li><li>대용량 생물다양성 데이터 ETL 파이프라인 설계 및 구축</li><li>지도 기반 분포 시각화 컴포넌트 개발 (Geo 데이터 처리)</li><li>다중 조건 복합 검색 기능 구현 (필터 UI + 백엔드 쿼리 최적화)</li><li>CLI 기반 일괄 데이터 등록 및 갱신 기능 구현</li><li>다국어(한국어 / 영어) 서비스 개발</li></ul></div>
+      <div class="modal-section"><div class="modal-section-title">사용 기술</div><div class="modal-stack"><span class="modal-chip">Angular 18</span><span class="modal-chip">TypeScript 5.4</span><span class="modal-chip">AG Grid 34</span><span class="modal-chip">Spring Boot 2.7</span><span class="modal-chip">Java 8</span><span class="modal-chip">MongoDB</span><span class="modal-chip">Geo Data</span><span class="modal-chip">ETL Pipeline</span><span class="modal-chip">i18n</span><span class="modal-chip">Node.js 18</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ JS ════ -->
+<script>
+/* 1. Cursor */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-5}px,${my-5}px)`;});
+(function tick(){rx+=(mx-rx-18)*.13;ry+=(my-ry-18)*.13;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.project-card,.strength-card,.stat-card,.contact-card,.core-skill-tag,.tech-tag,.modal-chip,.pub-card,.skill-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+});
+
+/* 2. Theme Toggle */
+const html=document.documentElement;
+const toggleBtn=document.getElementById('themeToggle');
+// 시스템 테마 감지 초기값
+const preferLight=window.matchMedia('(prefers-color-scheme: light)').matches;
+let isDark=!preferLight;
+// localStorage 저장값 우선
+const saved=localStorage.getItem('portfolio-theme');
+if(saved){isDark=saved==='dark';}
+html.setAttribute('data-theme',isDark?'dark':'light');
+
+toggleBtn.addEventListener('click',()=>{
+  isDark=!isDark;
+  html.setAttribute('data-theme',isDark?'dark':'light');
+  localStorage.setItem('portfolio-theme',isDark?'dark':'light');
+  // 파티클 색상 업데이트
+  updateParticleColors();
+});
+
+/* 3. Scroll */
+const prog=document.getElementById('scrollProgress'),navbar=document.getElementById('navbar');
+const secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  prog.style.width=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+  navbar.classList.toggle('scrolled',window.scrollY>60);
+  let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+/* 4. Reveal */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const sibs=[...e.target.parentElement.querySelectorAll('.reveal')];
+    setTimeout(()=>e.target.classList.add('visible'),sibs.indexOf(e.target)*80);
+    ro.unobserve(e.target);
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* 5. Typewriter */
+const phrases=['Frontend Developer','디자인 감각을 가진 개발자','UI · Publishing Specialist','백엔드까지 이해하는 프론트 개발자','Angular · HTML · CSS'];
+const twEl=document.getElementById('typewriterEl');
+let pi=0,ci=0,del=false;
+function tw(){
+  const p=phrases[pi];
+  if(!del){twEl.textContent=p.slice(0,++ci);if(ci===p.length){del=true;setTimeout(tw,1800);return;}}
+  else{twEl.textContent=p.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(tw,del?45:80);
+}
+tw();
+
+/* 6. Particles */
+const cvs=document.getElementById('particleCanvas'),c2=cvs.getContext('2d');
+let W,H,pts=[];
+const DARK_COLS=['#00e5ff','#7c3aed','#f59e0b','#ffffff'];
+const LIGHT_COLS=['#0099bb','#6d28d9','#d97706','#94a3b8'];
+let COLS=isDark?DARK_COLS:LIGHT_COLS;
+
+function updateParticleColors(){
+  COLS=html.getAttribute('data-theme')==='dark'?DARK_COLS:LIGHT_COLS;
+  pts.forEach(p=>p.c=COLS[Math.floor(Math.random()*4)]);
+}
+function rsz(){W=cvs.width=cvs.offsetWidth;H=cvs.height=cvs.offsetHeight;}
+rsz();window.addEventListener('resize',()=>{rsz();mkP();});
+function mkP(){pts=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+0.4,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,c:COLS[Math.floor(Math.random()*4)],a:Math.random()*.45+0.1}));}
+mkP();
+let mpx=-9999,mpy=-9999;
+cvs.parentElement.addEventListener('mousemove',e=>{const r=cvs.getBoundingClientRect();mpx=e.clientX-r.left;mpy=e.clientY-r.top;});
+function draw(){
+  c2.clearRect(0,0,W,H);
+  const lineColor=html.getAttribute('data-theme')==='dark'?'0,229,255':'0,153,187';
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<100){c2.beginPath();c2.moveTo(pts[i].x,pts[i].y);c2.lineTo(pts[j].x,pts[j].y);c2.strokeStyle=`rgba(${lineColor},${.07*(1-d/100)})`;c2.lineWidth=.5;c2.stroke();}}
+  pts.forEach(p=>{
+    const dx=p.x-mpx,dy=p.y-mpy,md=Math.hypot(dx,dy);
+    if(md<80){const f=(80-md)/80*.7;p.vx+=(dx/md)*f;p.vy+=(dy/md)*f;}
+    const sp=Math.hypot(p.vx,p.vy);if(sp>1.4){p.vx*=1.4/sp;p.vy*=1.4/sp;}
+    p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    const bi=parseInt(p.c.slice(1),16);
+    c2.beginPath();c2.arc(p.x,p.y,p.r,0,Math.PI*2);
+    c2.fillStyle=`rgba(${(bi>>16)&255},${(bi>>8)&255},${bi&255},${p.a})`;c2.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* 7. 3D Tilt */
+document.querySelectorAll('.strength-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(600px) rotateY(${x*12}deg) rotateX(${-y*12}deg) translateZ(5px)`;c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+document.querySelectorAll('.project-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1000px) rotateY(${x*5}deg) rotateX(${-y*3}deg) translateZ(3px)`;});
+  c.addEventListener('mouseleave',()=>{c.style.transform='';c.style.transition='transform .5s ease,border-color .3s,box-shadow .3s';});
+  c.addEventListener('mouseenter',()=>c.style.transition='border-color .3s,box-shadow .3s');
+});
+const pf=document.getElementById('photoFrame');
+if(pf){
+  pf.parentElement.addEventListener('mousemove',e=>{const r=pf.getBoundingClientRect();pf.style.transform=`perspective(600px) rotateY(${(e.clientX-r.left-r.width/2)/r.width*16}deg) rotateX(${-(e.clientY-r.top-r.height/2)/r.height*16}deg) scale(1.03)`;});
+  pf.parentElement.addEventListener('mouseleave',()=>{pf.style.transform='';pf.style.transition='transform .6s ease,box-shadow .4s';});
+  pf.parentElement.addEventListener('mouseenter',()=>pf.style.transition='box-shadow .4s');
+}
+
+/* 8. Modal */
+document.querySelectorAll('.project-card[data-modal]').forEach(c=>c.addEventListener('click',()=>openModal(c.dataset.modal)));
+function openModal(id){const bd=document.getElementById(id);if(!bd)return;bd.classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){const bd=document.getElementById(id);if(!bd)return;bd.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.modal-backdrop').forEach(bd=>bd.addEventListener('click',e=>{if(e.target===bd)closeModal(bd.id);}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-backdrop.open').forEach(bd=>closeModal(bd.id));});
+</script>
+</body>
+</html>
