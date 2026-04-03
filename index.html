@@ -2146,12 +2146,9 @@
     /* 2. Theme Toggle */
     const html = document.documentElement;
     const toggleBtn = document.getElementById('themeToggle');
-    // 시스템 테마 감지 초기값
-    const preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    let isDark = !preferLight;
-    // localStorage 저장값 우선
+    // 기본값: 다크모드 고정 (localStorage 저장값 있으면 그것 우선)
     const saved = localStorage.getItem('portfolio-theme');
-    if (saved) { isDark = saved === 'dark'; }
+    let isDark = saved ? saved === 'dark' : true;
     html.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
     toggleBtn.addEventListener('click', () => {
