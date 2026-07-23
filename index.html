@@ -891,6 +891,27 @@
       opacity: 1;
     }
 
+    .skill-tag.featured,
+    .core-skill-tag.featured {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      font-weight: 600;
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent2) 25%, transparent), 0 4px 18px color-mix(in srgb, var(--accent2) 22%, transparent);
+    }
+
+    .skill-tag.featured::before {
+      background: var(--accent2);
+      opacity: 1;
+    }
+
+    .strength-card.featured {
+      border-color: color-mix(in srgb, var(--accent2) 35%, transparent);
+    }
+
+    .strength-card.featured .strength-icon {
+      color: var(--accent2);
+    }
+
     .tech-tags-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
@@ -961,6 +982,12 @@
       background: color-mix(in srgb, var(--accent3) 12%, transparent);
       color: var(--accent3);
       border: 1px solid color-mix(in srgb, var(--accent3) 28%, transparent);
+    }
+
+    .proj-group-badge.frontend {
+      background: color-mix(in srgb, var(--accent2) 12%, transparent);
+      color: var(--accent2);
+      border: 1px solid color-mix(in srgb, var(--accent2) 28%, transparent);
     }
 
     .proj-group-company {
@@ -1117,6 +1144,12 @@
       background: color-mix(in srgb, var(--accent3) 12%, transparent);
       color: var(--accent3);
       border: 1px solid color-mix(in srgb, var(--accent3) 22%, transparent);
+    }
+
+    .badge-frontend {
+      background: color-mix(in srgb, var(--accent2) 12%, transparent);
+      color: var(--accent2);
+      border: 1px solid color-mix(in srgb, var(--accent2) 22%, transparent);
     }
 
     .project-title {
@@ -1828,16 +1861,18 @@
         <div class="hero-info-item"><span class="dot"></span>📞 010-5324-6883</div>
       </div>
       <div class="hero-core-skills">
-        <span class="core-skill-tag primary">Angular</span>
+        <span class="core-skill-tag primary featured">Next.js</span>
+        <span class="core-skill-tag primary">React</span>
         <span class="core-skill-tag primary">TypeScript</span>
-        <span class="core-skill-tag primary">Python</span>
-        <span class="core-skill-tag primary">Spring Boot</span>
-        <span class="core-skill-tag primary">Java</span>
-        <span class="core-skill-tag primary">MongoDB</span>
         <span class="core-skill-tag primary">REST API</span>
-        <span class="core-skill-tag">시각화</span>
+        <span class="core-skill-tag primary">시각화 / 실시간 데이터</span>
+        <span class="core-skill-tag primary">반응형</span>
+        <span class="core-skill-tag">Angular</span>
+        <span class="core-skill-tag">Python</span>
+        <span class="core-skill-tag">Spring Boot</span>
+        <span class="core-skill-tag">Java</span>
+        <span class="core-skill-tag">MongoDB</span>
         <span class="core-skill-tag">HTML / CSS / JS</span>
-        <span class="core-skill-tag">반응형</span>
         <span class="core-skill-tag">웹표준/접근성/호환성</span>
       </div>
     </div>
@@ -1889,7 +1924,13 @@
         <div class="strength-icon">🎨</div>
         <div class="strength-title">디자인 감각</div>
         <div class="strength-desc">퍼블리셔 경력을 바탕으로 UI 감각을 키웠으며, 사용자 경험을 최우선으로 생각합니다. 단순히 화면을 만드는 게 아니라, 사용자가 느끼는 경험을 설계하는
-          개발자</div>
+          개발자가 되고자 합니다.</div>
+      </div>
+      <div class="strength-card featured reveal">
+        <div class="shine"></div>
+        <div class="strength-icon">▲</div>
+        <div class="strength-title">Next.js / React</div>
+        <div class="strength-desc">Next.js(App Router) 기반 기업 홈페이지 신규 구축 및 다국어([locale]) 라우팅 설계. shadcn/ui·Tailwind CSS 디자인 시스템, Storybook·Vitest·Playwright 테스트 환경까지 프론트엔드 전 영역 실무 경험</div>
       </div>
       <div class="strength-card reveal">
         <div class="shine"></div>
@@ -1928,9 +1969,11 @@
       <div class="skill-category">
         <h4>🎯 Frontend</h4>
         <div class="skill-tag-list">
+          <span class="skill-tag primary featured">Next.js</span>
+          <span class="skill-tag primary">React</span>
+          <span class="skill-tag primary">TypeScript</span>
           <span class="skill-tag primary">Angular</span>
           <span class="skill-tag primary">JavaScript (ES6+)</span>
-          <span class="skill-tag primary">TypeScript</span>
           <span class="skill-tag primary">AG Grid</span>
           <span class="skill-tag primary">i18n 다국어</span>
           <span class="skill-tag primary">반응형 웹</span>
@@ -1942,20 +1985,17 @@
       <div class="skill-category">
         <h4>➕ Backend</h4>
         <div class="skill-tag-list">
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Git</span>
+          <span class="skill-tag primary">Java</span>
+          <span class="skill-tag primary">Spring Boot</span>
+          <span class="skill-tag primary">Python</span>
+          <span class="skill-tag primary">MongoDB</span>
+          <span class="skill-tag primary">Docker</span>
+          <span class="skill-tag primary">Git</span>
         </div>
       </div>
       <div class="skill-category">
         <h4>🚀 Learning — 목표 스킬</h4>
         <div class="skill-tag-list">
-          <span class="skill-tag"
-            style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">React<span
-              style="font-size:.65em;opacity:.7;">(학습 중)</span></span>
           <span class="skill-tag"
             style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">WebSocket 실시간
             통신 <span style="font-size:.65em;opacity:.7;">(목표)</span></span>
@@ -1980,8 +2020,52 @@
       <h2 class="section-title">진행 프로젝트</h2>
     </div>
     <div class="proj-group-label reveal">
+      <span class="proj-group-badge frontend">🎯 Frontend 개발</span>
+      <span class="proj-group-company">신테카바이오 · 2026.06 — 재직중</span>
+    </div>
+    <div class="projects-list">
+      <div class="project-card reveal">
+        <div class="project-img-wrap">
+          <div class="project-img-placeholder">
+            <div class="img-icon">🧬</div>
+            <div class="img-label">신테카바이오 홈페이지</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div>
+            <div class="project-meta">
+              <span class="project-company">신테카바이오</span>
+              <span class="project-date">2026.06 — 재직중</span>
+              <span class="project-type-badge badge-frontend">Frontend</span>
+            </div>
+            <h3 class="project-title">신테카바이오 기업 홈페이지 리뉴얼 (fe-stb-home)</h3>
+            <ul class="project-tasks">
+              <li>Next.js(App Router) 기반 기업 홈페이지 신규 구축 및 레이아웃 설계</li>
+              <li>다수 정적/동적 페이지 개발</li>
+              <li>react-i18next 기반 다국어(i18n) 콘텐츠 처리</li>
+              <li>shadcn/ui + Tailwind CSS 기반 디자인 시스템 구축</li>
+              <li>Storybook 컴포넌트 문서화, Vitest 단위 테스트 및 Playwright E2E 테스트 환경 구축</li>
+            </ul>
+            <div class="project-stack">
+              <span class="stack-chip">React</span>
+              <span class="stack-chip">Next.js</span>
+              <span class="stack-chip">TypeScript</span>
+              <span class="stack-chip">Tailwind CSS</span>
+              <span class="stack-chip">shadcn/ui</span>
+              <span class="stack-chip">react-i18next</span>
+              <span class="stack-chip">TanStack Table</span>
+              <span class="stack-chip">Storybook</span>
+              <span class="stack-chip">Vitest</span>
+              <span class="stack-chip">Playwright</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-group-label reveal" style="margin-top:56px;">
       <span class="proj-group-badge fullstack">⚡ Full-Stack 개발</span>
-      <span class="proj-group-company">인실리코젠 · 2024.10 — 현재</span>
+      <span class="proj-group-company">인실리코젠 · 2024.10 — 2026.05</span>
     </div>
     <div class="projects-list">
       <div class="project-card reveal">
@@ -1997,7 +2081,7 @@
           <div>
             <div class="project-meta">
               <span class="project-company">인실리코젠</span>
-              <span class="project-date">2024.10 — 현재</span>
+              <span class="project-date">2024.10 — 2026.05</span>
               <span class="project-type-badge badge-fullstack">Full-Stack</span>
             </div>
             <h3 class="project-title">[해양수산부] 국립해양생물자원관 연구과제</h3>
