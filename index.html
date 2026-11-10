@@ -735,12 +735,6 @@
       margin-bottom: 64px;
     }
 
-    @media(max-width:960px) {
-      .strengths-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
-
     .strength-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -828,7 +822,7 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 36px;
       margin-bottom: 44px;
     }
@@ -1041,6 +1035,12 @@
 
     .project-card:hover .project-img-wrap img {
       transform: scale(1.04);
+    }
+
+    .project-img-wrap.project-img-full img {
+      object-fit: contain;
+      object-position: center;
+      transform: none;
     }
 
     .project-img-placeholder {
@@ -1709,21 +1709,93 @@
    REVEAL
 ══════════════════════════════════════ */
     .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
+      /* Separate entrance movement from the existing hover/tilt transform. */
+      translate: 0 var(--reveal-y, 0px);
     }
 
-    .reveal.visible {
+    .reveal.motion-pending {
+      opacity: 0;
+      --reveal-y: 28px;
+      transition: opacity .8s ease, translate .8s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .reveal.motion-pending.visible {
       opacity: 1;
-      transform: translateY(0);
+      --reveal-y: 0px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal,
+      .reveal.motion-pending {
+        opacity: 1;
+        translate: none;
+      }
+
+      #particleCanvas {
+        display: none;
+      }
     }
 
     /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+
+    .hero-left,
+    .hero-right,
+    .strength-card,
+    .skill-category,
+    .project-body > div,
+    .pub-card,
+    .stat-card {
+      min-width: 0;
+    }
+
+    .hero-name,
+    .hero-desc,
+    .strength-desc,
+    .project-title,
+    .project-tasks li,
+    .pub-card-name,
+    .pub-card-desc {
+      overflow-wrap: anywhere;
+    }
+
+    .stack-chip,
+    .core-skill-tag,
+    .skill-tag {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      body {
+        cursor: auto;
+      }
+
+      .cursor,
+      .cursor-ring {
+        display: none;
+      }
+    }
+
     @media(max-width:960px) {
-      nav {
+      nav,
+      nav.scrolled {
         padding: 14px 20px;
       }
 
@@ -1739,6 +1811,11 @@
       .hero-right {
         flex-direction: row;
         justify-content: flex-start;
+      }
+
+      .hero-right .stats-grid {
+        flex: 1;
+        min-width: 0;
       }
 
       #skills,
@@ -1769,7 +1846,11 @@
       }
 
       .project-img-wrap {
-        height: 160px;
+        height: clamp(180px, 35vw, 320px);
+      }
+
+      .proj-group-label {
+        flex-wrap: wrap;
       }
 
       .pub-grid {
@@ -1799,6 +1880,55 @@
     }
 
     @media(max-width:560px) {
+      #hero {
+        gap: 28px;
+        min-height: auto;
+      }
+
+      .hero-name {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+      }
+
+      .hero-right {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .photo-frame {
+        align-self: center;
+        width: 180px;
+        height: 180px;
+      }
+
+      .hero-right .stats-grid {
+        flex: auto;
+        max-width: none;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .section-header {
+        margin-bottom: 32px;
+      }
+
+      .strength-card {
+        padding: 22px 20px;
+      }
+
+      .project-body {
+        padding: 20px 16px;
+      }
+
+      .project-meta {
+        row-gap: 8px;
+      }
+
+      .stack-chip {
+        padding: 3px 7px;
+      }
+
       .strengths-grid {
         grid-template-columns: 1fr;
       }
@@ -1850,15 +1980,18 @@
       <p class="hero-tagline"><span class="prefix">&gt;</span><span id="typewriterEl" class="typewriter-text"></span>
       </p>
       <p class="hero-desc">
-        단순히 화면을 만드는 게 아니라, <em>사용자가 느끼는 경험</em>을 설계합니다.<br>
-        퍼플리셔/풀스택 개발 역량을 바탕으로, 서비스 품질 향상과 기술적 성장에 기여하며<br>함께 성장하는 개발자가 되고 싶습니다.
+        <em>사용자가 느끼는 경험</em>을 설계하는 개발자<br>
+        퍼블리싱/풀스택 개발 역량을 바탕으로 서비스 품질 향상에 기여<br>
+        백엔드 경험을 바탕으로 서비스 전반의 구조와 데이터 흐름을 이해한 프론트엔드 개발<br>
+        기획부터 아키텍처 설계, 구현, QA 대응과 운영까지 프론트엔드 전 영역 담당
       </p>
       <div class="hero-info-row">
-        <div class="hero-info-item"><span class="dot"></span>웹 개발 1년 10개월(재직중)</div>
+        <div class="hero-info-item"><span class="dot"></span>웹 개발 2년 2개월(재직중)</div>
         <div class="hero-info-item"><span class="dot"></span>퍼블리셔 3년 이상</div>
+        <div class="hero-info-item"><span class="dot"></span>대덕인재개발원 풀스택 수료</div>
         <div class="hero-info-item"><span class="dot"></span>대전 유성구 거주</div>
         <div class="hero-info-item"><span class="dot"></span>1994.03.08 (만 32세)</div>
-        <div class="hero-info-item"><span class="dot"></span>📞 010-5324-6883</div>
+        <div class="hero-info-item"><span class="dot"></span>010-5324-6883</div>
       </div>
       <div class="hero-core-skills">
         <span class="core-skill-tag primary featured">Next.js</span>
@@ -1867,12 +2000,17 @@
         <span class="core-skill-tag primary">REST API</span>
         <span class="core-skill-tag primary">시각화 / 실시간 데이터</span>
         <span class="core-skill-tag primary">반응형</span>
+        <span class="core-skill-tag">Next.js</span>
+        <span class="core-skill-tag">JavaScript</span>
         <span class="core-skill-tag">Angular</span>
-        <span class="core-skill-tag">Python</span>
-        <span class="core-skill-tag">Spring Boot</span>
+        <span class="core-skill-tag">React</span>
         <span class="core-skill-tag">Java</span>
+        <span class="core-skill-tag">Spring Boot</span>
+        <span class="core-skill-tag">Docker</span>
+        <span class="core-skill-tag">Python</span>
         <span class="core-skill-tag">MongoDB</span>
-        <span class="core-skill-tag">HTML / CSS / JS</span>
+        <span class="core-skill-tag">HTML/CSS/JS</span>
+        <span class="core-skill-tag">SEO/GEO/AEO</span>
         <span class="core-skill-tag">웹표준/접근성/호환성</span>
       </div>
     </div>
@@ -1919,36 +2057,23 @@
       <h2 class="section-title">강점 <span class="dim">&amp;</span> 기술 스택</h2>
     </div>
     <div class="strengths-grid">
-      <div class="strength-card reveal">
-        <div class="shine"></div>
-        <div class="strength-icon">🎨</div>
-        <div class="strength-title">디자인 감각</div>
-        <div class="strength-desc">퍼블리셔 경력을 바탕으로 UI 감각을 키웠으며, 사용자 경험을 최우선으로 생각합니다. 단순히 화면을 만드는 게 아니라, 사용자가 느끼는 경험을 설계하는
-          개발자가 되고자 합니다.</div>
-      </div>
       <div class="strength-card featured reveal">
         <div class="shine"></div>
         <div class="strength-icon">▲</div>
         <div class="strength-title">Next.js / React</div>
-        <div class="strength-desc">Next.js(App Router) 기반 기업 홈페이지 신규 구축 및 다국어([locale]) 라우팅 설계. shadcn/ui·Tailwind CSS 디자인 시스템, Storybook·Vitest·Playwright 테스트 환경까지 프론트엔드 전 영역 실무 경험</div>
+        <div class="strength-desc">Next.js 기반 기업 홈페이지 구축 및 운영<br>shadcn/ui, Tailwind CSS 디자인 시스템과 Storybook 기반 개발 환경 구축, Vitest/Playwright 기반 품질 관리 주도</div>
       </div>
       <div class="strength-card reveal">
         <div class="shine"></div>
         <div class="strength-icon">⚡</div>
         <div class="strength-title">프론트엔드</div>
-        <div class="strength-desc">Angular 기반 UI 컴포넌트 설계/구현. 복잡한 AG Grid 데이터 테이블, 검색 필터, 다국어 처리 등 실서비스 기능 구축</div>
+        <div class="strength-desc">Next.js(React)/Angular 기반 UI 컴포넌트 설계 및 구현 <br>복잡한 데이터 테이블 처리, 검색 필터, 다국어 처리 등 실서비스 기능 구축</div>
       </div>
       <div class="strength-card reveal">
         <div class="shine"></div>
         <div class="strength-icon">🔗</div>
         <div class="strength-title">백엔드</div>
-        <div class="strength-desc">Spring Boot / MongoDB / REST API 실무 경험</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="shine"></div>
-        <div class="strength-icon">🌍</div>
-        <div class="strength-title">다국어 기능 개발</div>
-        <div class="strength-desc">해양생물 정보 서비스 다국어 UI 구현 경험</div>
+        <div class="strength-desc">JAVA / Spring Boot / MongoDB / REST API</div>
       </div>
       <div class="strength-card reveal">
         <div class="shine"></div>
@@ -1958,9 +2083,21 @@
       </div>
       <div class="strength-card reveal">
         <div class="shine"></div>
+        <div class="strength-icon">🌍</div>
+        <div class="strength-title">다국어 기능 개발</div>
+        <div class="strength-desc">해양생물 정보 서비스 다국어 UI 구현 경험</div>
+      </div>
+      <div class="strength-card reveal">
+        <div class="shine"></div>
+        <div class="strength-icon">🎨</div>
+        <div class="strength-title">디자인 감각</div>
+        <div class="strength-desc">퍼블리셔 경력을 바탕으로 쌓은 UI 감각과 사용자 중심 설계 역량<br>화면 구성부터 상호작용까지 일관된 사용자 경험 구현</div>
+      </div>
+      <div class="strength-card reveal">
+        <div class="shine"></div>
         <div class="strength-icon">🤖</div>
         <div class="strength-title">성실 / 책임감</div>
-        <div class="strength-desc">4년 연속 성적 우수 장학금 수여, 책임감 있는 태도로 업무를 수행합니다.</div>
+        <div class="strength-desc">4년 연속 성적 우수 장학금 수혜, 성실함과 책임감을 바탕으로 한 업무 수행</div>
       </div>
     </div>
     <div class="divider"></div>
@@ -1993,23 +2130,6 @@
           <span class="skill-tag primary">Git</span>
         </div>
       </div>
-      <div class="skill-category">
-        <h4>🚀 Learning — 목표 스킬</h4>
-        <div class="skill-tag-list">
-          <span class="skill-tag"
-            style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">WebSocket 실시간
-            통신 <span style="font-size:.65em;opacity:.7;">(목표)</span></span>
-          <span class="skill-tag"
-            style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">Three.js 3D 시각화
-            <span style="font-size:.65em;opacity:.7;">(목표)</span></span>
-          <span class="skill-tag"
-            style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">WebRTC<span
-              style="font-size:.65em;opacity:.7;">(목표)</span></span>
-          <span class="skill-tag"
-            style="border-color:color-mix(in srgb,var(--accent2) 40%,transparent);color:var(--accent2);">LLM/RAG<span
-              style="font-size:.65em;opacity:.7;">(목표)</span></span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2021,32 +2141,31 @@
     </div>
     <div class="proj-group-label reveal">
       <span class="proj-group-badge frontend">🎯 Frontend 개발</span>
-      <span class="proj-group-company">신테카바이오 · 2026.06 — 재직중</span>
+      <span class="proj-group-company">신테카바이오 / 2026.06 — 재직중 / 대리</span>
     </div>
     <div class="projects-list">
       <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <div class="project-img-placeholder">
-            <div class="img-icon">🧬</div>
-            <div class="img-label">
-              <img src="./img/stb.png" alt="이미지" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-          </div>
+        <div class="project-img-wrap project-img-full">
+          <img src="./img/stb.png" alt="신테카바이오 회사 홈페이지">
         </div>
         <div class="project-body">
           <div>
             <div class="project-meta">
-              <span class="project-company">신테카바이오</span>
-              <span class="project-date">2026.06 — 재직중</span>
+              <span class="project-company">신테카바이오 / 2026.06 — 재직중</span>
               <span class="project-type-badge badge-frontend">Frontend</span>
             </div>
-            <h3 class="project-title">신테카바이오 기업 홈페이지 신규 구축</h3>
+            <h3 class="project-title">회사 홈페이지 신규 구축 및 운영</h3>
             <ul class="project-tasks">
+              <li>프론트엔드 개발 담당, 백엔드/인프라 담당자 2명과 협업</li>
+              <li>기획부터 QA 대응까지 프론트엔드 전 영역 개발</li>
+              <li>프론트엔드 아키텍처 설계, 주요 기능 구현 및 품질 관리 주도</li>
               <li>Next.js(App Router) 기반 기업 홈페이지 신규 구축 및 레이아웃 설계</li>
               <li>다수 정적/동적 페이지 개발</li>
               <li>react-i18next 기반 다국어(i18n) 콘텐츠 처리</li>
               <li>shadcn/ui + Tailwind CSS 기반 디자인 시스템 구축</li>
-              <li>Storybook 컴포넌트 문서화, Vitest 단위 테스트 및 Playwright E2E 테스트 환경 구축</li>
+              <li>SEO/GEO/AEO 적용을 통한 검색/생성형 AI/답변 엔진 최적화</li>
+              <li>Storybook 기반 프론트엔드 개발 환경 구축 및 컴포넌트 문서화</li>
+              <li>Vitest 단위 테스트 및 Playwright E2E 테스트 환경 구축</li>
             </ul>
             <div class="project-stack">
               <span class="stack-chip">React</span>
@@ -2063,11 +2182,27 @@
           </div>
         </div>
       </div>
+      <div class="project-card reveal">
+        <div class="project-img-wrap project-img-full">
+          <img src="./img/stb2.png" alt="KLDC 프로젝트">
+        </div>
+        <div class="project-body">
+          <div>
+
+            <h3 class="project-title">신규 프로젝트(KLDC) 신규 구축 및 운영</h3>
+            <ul class="project-tasks">
+              <li>KLDC 신규 구축 및 운영을 위한 프론트엔드 개발 담당</li>
+              <li>백엔드/인프라 담당자 2명과 협업, 기획부터 QA 대응까지 프론트엔드 전 영역 개발</li>
+              <li>프론트엔드 아키텍처 설계, 주요 기능 구현 및 품질 관리 주도</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="proj-group-label reveal" style="margin-top:56px;">
       <span class="proj-group-badge fullstack">⚡ Full-Stack 개발</span>
-      <span class="proj-group-company">인실리코젠 · 2024.10 — 2026.05</span>
+      <span class="proj-group-company">인실리코젠 / 2024.10 — 2026.04 / 사원</span>
     </div>
     <div class="projects-list">
       <div class="project-card reveal">
@@ -2082,8 +2217,7 @@
         <div class="project-body">
           <div>
             <div class="project-meta">
-              <span class="project-company">인실리코젠</span>
-              <span class="project-date">2024.10 — 2026.05</span>
+              <span class="project-company">인실리코젠 / 2024.10 — 2026.04</span>
               <span class="project-type-badge badge-fullstack">Full-Stack</span>
             </div>
             <h3 class="project-title">[해양수산부] 국립해양생물자원관 연구과제</h3>
@@ -2111,7 +2245,7 @@
 
     <div class="proj-group-label reveal" style="margin-top:56px;">
       <span class="proj-group-badge pub">🖌 퍼블리싱</span>
-      <span class="proj-group-company">(주)에이투엠 · 2020.11 — 2023.06</span>
+      <span class="proj-group-company">(주)에이투엠 / 2020.11 — 2023.06 / 주임연구원</span>
     </div>
     <div class="pub-grid">
       <div class="pub-card reveal">
@@ -2135,7 +2269,7 @@
         </div>
         <div class="pub-card-icon">⚡</div>
         <div class="pub-card-name">제주에너지공사 해상풍력 서비스</div>
-        <div class="pub-card-desc">제주에너지공사 납품용 해상풍력 운영 서비스 화면 구현. 공공기관 수준의 완성도·접근성 대응.</div>
+        <div class="pub-card-desc">제주에너지공사 납품용 해상풍력 운영 서비스 화면 구현. 공공기관 수준의 완성도/접근성 대응.</div>
         <div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">공공 UI</span><span
             class="pub-tag">크로스브라우징</span></div>
       </div>
@@ -2147,7 +2281,7 @@
         </div>
         <div class="pub-card-icon">🔧</div>
         <div class="pub-card-name">WT 전용 스마트 O&amp;M 플랫폼</div>
-        <div class="pub-card-desc">풍력터빈 전용 스마트 운영·유지보수 플랫폼 퍼블리싱. 장비 상태 인디케이터·알람 UI 구성.</div>
+        <div class="pub-card-desc">풍력터빈 전용 스마트 운영/유지보수 플랫폼 퍼블리싱. 장비 상태 인디케이터/알람 UI 구성.</div>
         <div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">IoT UI</span><span
             class="pub-tag">상태 모니터링</span></div>
       </div>
@@ -2159,7 +2293,7 @@
         </div>
         <div class="pub-card-icon">🛡️</div>
         <div class="pub-card-name">HSE 운영지원시스템</div>
-        <div class="pub-card-desc">안전·보건·환경 운영 지원 시스템 퍼블리싱. 복잡한 폼·리스트·보고서 레이아웃 마크업.</div>
+        <div class="pub-card-desc">안전/보건/환경 운영 지원 시스템 퍼블리싱. 복잡한 폼/리스트/보고서 레이아웃 마크업.</div>
         <div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">폼 UI</span><span
             class="pub-tag">반응형</span></div>
       </div>
@@ -2206,7 +2340,7 @@
         </div>
         <div class="pub-card-icon">💬</div>
         <div class="pub-card-name">그룹웨어 [아임웨어]</div>
-        <div class="pub-card-desc">사내 그룹웨어 솔루션 전체 UI 퍼블리싱. 결재·메일·게시판·일정 등 엔터프라이즈 컴포넌트 구현.</div>
+        <div class="pub-card-desc">사내 그룹웨어 솔루션 전체 UI 퍼블리싱. 결재/메일/게시판/일정 등 엔터프라이즈 컴포넌트 구현.</div>
         <div class="pub-card-tags"><span class="pub-tag">HTML/CSS/JS</span><span class="pub-tag">그룹웨어 UI</span></div>
       </div>
     </div>
@@ -2217,6 +2351,8 @@
   </footer>
 
   <!-- ════ JS ════ -->
+  <script src="./vendor/gsap.min.js"></script>
+  <script src="./vendor/ScrollTrigger.min.js"></script>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     /* 1. Cursor */
@@ -2255,22 +2391,91 @@
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
     });
 
-    /* 4. Reveal */
-    const ro = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const sibs = [...e.target.parentElement.querySelectorAll('.reveal')];
-        setTimeout(() => e.target.classList.add('visible'), sibs.indexOf(e.target) * 80);
-        ro.unobserve(e.target);
+    /* 4. Scroll entrances — GSAP + a native fallback. */
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelector('.skills-grid')?.classList.remove('reveal');
+    document.querySelectorAll('.skill-category, .project-tasks li').forEach(el => el.classList.add('reveal'));
+
+    function initScrollMotion() {
+      if (!window.gsap || !window.ScrollTrigger) {
+        if (motionPreference.matches || !('IntersectionObserver' in window)) return;
+        const targets = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+          const entering = entries.filter(entry => entry.isIntersecting);
+          entering.forEach((entry, index) => {
+            entry.target.style.transitionDelay = `${Math.min(index, 2) * 80}ms`;
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
+        targets.forEach(el => { el.classList.add('motion-pending'); observer.observe(el); });
+        motionPreference.addEventListener('change', () => {
+          if (!motionPreference.matches) return;
+          observer.disconnect();
+          targets.forEach(el => el.classList.add('visible'));
+        });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+      const media = gsap.matchMedia();
+      media.add({
+        all: '(min-width: 0px)',
+        mobile: '(max-width: 560px)',
+        reduce: '(prefers-reduced-motion: reduce)'
+      }, context => {
+        if (context.conditions.reduce) return;
+        const mobile = context.conditions.mobile;
+        const distance = mobile ? 22 : 46;
+        const targets = gsap.utils.toArray('.reveal');
+        gsap.set(targets, { opacity: 0, '--reveal-y': `${distance}px` });
+
+        ScrollTrigger.batch(targets, {
+          start: 'clamp(top 92%)',
+          once: true,
+          interval: .08,
+          batchMax: mobile ? 1 : 3,
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            '--reveal-y': '0px',
+            duration: mobile ? .65 : .95,
+            ease: 'power3.out',
+            stagger: .1,
+            overwrite: 'auto',
+            clearProps: 'opacity,--reveal-y'
+          })
+        });
+
+        gsap.from('.hero-left > *, .hero-right > *', {
+          opacity: 0,
+          y: mobile ? 16 : 28,
+          duration: .85,
+          stagger: .09,
+          ease: 'power3.out',
+          clearProps: 'opacity,transform'
+        });
+
+        gsap.utils.toArray('.project-img-wrap').forEach(frame => {
+          gsap.fromTo(frame, { clipPath: 'inset(10% 0% 10% 0%)' }, {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: mobile ? .75 : 1.2,
+            ease: 'power3.out',
+            clearProps: 'clipPath',
+            scrollTrigger: { trigger: frame, start: 'clamp(top 92%)', once: true }
+          });
+        });
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+    }
+    initScrollMotion();
 
     /* 5. Typewriter */
-    const phrases = ['디자인 감각을 가진 개발자', 'UI · Publishing Specialist', '사용자 경험을 설계하는 개발자'];
+    const phrases = ['디자인 감각을 가진 개발자', 'UI / Publishing Specialist', '사용자 경험을 설계하는 개발자'];
     const twEl = document.getElementById('typewriterEl');
     let pi = 0, ci = 0, del = false;
     function tw() {
+      if (motionPreference.matches) { twEl.textContent = phrases[0]; return; }
       const p = phrases[pi];
       if (!del) { twEl.textContent = p.slice(0, ++ci); if (ci === p.length) { del = true; setTimeout(tw, 1800); return; } }
       else { twEl.textContent = p.slice(0, --ci); if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; } }
@@ -2294,8 +2499,9 @@
     function mkP() { pts = Array.from({ length: 80 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.8 + 0.4, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, c: COLS[Math.floor(Math.random() * 4)], a: Math.random() * .45 + 0.1 })); }
     mkP();
     let mpx = -9999, mpy = -9999;
-    cvs.parentElement.addEventListener('mousemove', e => { const r = cvs.getBoundingClientRect(); mpx = e.clientX - r.left; mpy = e.clientY - r.top; });
+    cvs.parentElement.addEventListener('mousemove', e => { if (motionPreference.matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; const r = cvs.getBoundingClientRect(); mpx = e.clientX - r.left; mpy = e.clientY - r.top; });
     function draw() {
+      if (motionPreference.matches) return;
       c2.clearRect(0, 0, W, H);
       const lineColor = html.getAttribute('data-theme') === 'dark' ? '0,229,255' : '0,153,187';
       for (let i = 0; i < pts.length; i++)for (let j = i + 1; j < pts.length; j++) { const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y); if (d < 100) { c2.beginPath(); c2.moveTo(pts[i].x, pts[i].y); c2.lineTo(pts[j].x, pts[j].y); c2.strokeStyle = `rgba(${lineColor},${.07 * (1 - d / 100)})`; c2.lineWidth = .5; c2.stroke(); } }
@@ -2311,20 +2517,23 @@
       requestAnimationFrame(draw);
     }
     draw();
+    motionPreference.addEventListener('change', () => {
+      if (!motionPreference.matches) { draw(); tw(); }
+    });
 
     /* 7. 3D Tilt */
     document.querySelectorAll('.strength-card').forEach(c => {
-      c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(5px)`; c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); });
+      c.addEventListener('mousemove', e => { if (motionPreference.matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(5px)`; c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); });
       c.addEventListener('mouseleave', () => c.style.transform = '');
     });
     document.querySelectorAll('.project-card').forEach(c => {
-      c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 3}deg) translateZ(3px)`; });
+      c.addEventListener('mousemove', e => { if (motionPreference.matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 3}deg) translateZ(3px)`; });
       c.addEventListener('mouseleave', () => { c.style.transform = ''; c.style.transition = 'transform .5s ease,border-color .3s,box-shadow .3s'; });
       c.addEventListener('mouseenter', () => c.style.transition = 'border-color .3s,box-shadow .3s');
     });
     const pf = document.getElementById('photoFrame');
     if (pf) {
-      pf.parentElement.addEventListener('mousemove', e => { const r = pf.getBoundingClientRect(); pf.style.transform = `perspective(600px) rotateY(${(e.clientX - r.left - r.width / 2) / r.width * 16}deg) rotateX(${-(e.clientY - r.top - r.height / 2) / r.height * 16}deg) scale(1.03)`; });
+      pf.parentElement.addEventListener('mousemove', e => { if (motionPreference.matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; const r = pf.getBoundingClientRect(); pf.style.transform = `perspective(600px) rotateY(${(e.clientX - r.left - r.width / 2) / r.width * 16}deg) rotateX(${-(e.clientY - r.top - r.height / 2) / r.height * 16}deg) scale(1.03)`; });
       pf.parentElement.addEventListener('mouseleave', () => { pf.style.transform = ''; pf.style.transition = 'transform .6s ease,box-shadow .4s'; });
       pf.parentElement.addEventListener('mouseenter', () => pf.style.transition = 'box-shadow .4s');
     }
